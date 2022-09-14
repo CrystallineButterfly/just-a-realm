@@ -6,10 +6,12 @@ function main() {
   const near = 0.1;
   const far = 2000;
 
-  const orbit = new THREE.OrbitControls(camera, canvas);
+  
 
   const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
   camera.position.z = 2;
+
+  const orbit = new THREE.OrbitControls(camera, canvas);
 
   const renderer = new THREE.WebGLRenderer({ canvas });
 
@@ -21,7 +23,7 @@ function main() {
   const texture = loader.load('https://threejs.org/manual/examples/resources/images/equirectangularmaps/tears_of_steel_bridge_2k.jpg', () => {
     const rf = new THREE.WebGLCubeRenderTarget(texture.image.height)
     rf.fromEquirectangularTexture(renderer, texture)
-    scene.background = rt.texture;
+    scene.background = rf.texture;
   });
 
   function render() {
